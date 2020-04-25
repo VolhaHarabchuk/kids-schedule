@@ -54,6 +54,7 @@ const actions = [
 ];
 
 function renderSchedule (elementId, actions, currentTime) {
+    console.log({currentTime})
     const containerEl = document.getElementById(elementId);
     let shownItems = 0;
     for (let i=0; i < actions.length; i++) {
@@ -69,7 +70,10 @@ function renderSchedule (elementId, actions, currentTime) {
 }
 
 function isUpcomingAction(action, currentTime) {
-    return true;
+    if (action.time.hour >= currentTime.getHours() && action.time.minute >= currentTime.getMinutes()) {
+        return true;
+    }
+    return false;
 }
 
 function timeString (action) {
