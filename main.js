@@ -1,3 +1,5 @@
+const MAX_UPCOMING_ACTIONS = 3;
+
 const actions = [
     {
         title: 'Wake up',
@@ -53,10 +55,21 @@ const actions = [
 
 function renderSchedule (elementId, actions, currentTime) {
     const containerEl = document.getElementById(elementId);
+    let shownItems = 0;
     for (let i=0; i < actions.length; i++) {
-        const actionEl = createActionElement(actions[i]);
-        containerEl.appendChild(actionEl);
+        if (isUpcomingAction(actions[i], currentTime)) {
+            const actionEl = createActionElement(actions[i]);
+            containerEl.appendChild(actionEl);
+            shownItems += 1;
+        }
+        if (shownItems >= MAX_UPCOMING_ACTIONS) {
+            break;
+        }
     }
+}
+
+function isUpcomingAction(action, currentTime) {
+    return true;
 }
 
 function timeString (action) {
