@@ -4,57 +4,56 @@ const actions = [
     {
         title: 'Wake up',
         time: { hour: 7, minute: 20 },
-        icon: ''
+        icon: 'far fa-clock'
     },
     {
         title: 'Breakfast',
         time: { hour: 7, minute: 50 },
-        icon: ''
+        icon: 'fas fa-coffee'
     },
     {
         title: 'Brush teeth',
         time: { hour: 8, minute: 20 },
-        icon: ''
+        icon: 'far fa-tooth'
     },
     {
         title: 'Go to school',
         time: { hour: 8, minute: 30 },
-        icon: ''
+        icon: 'fas fa-graduation-cap'
     },
     {
         title: 'Homework',
         time: { hour: 15, minute: 0 },
-        icon: ''
+        icon: 'fas fa-book-reader'
     },
     {
         title: 'Cartoons',
         time: { hour: 17, minute: 10 },
-        icon: ''
+        icon: 'fas fa-tv'
     },
     {
         title: 'Dinner',
         time: { hour: 17, minute: 30 },
-        icon: ''
+        icon: 'fas fa-utensils'
     },
     {
         title: 'Brush teeth',
         time: { hour: 20, minute: 30 },
-        icon: ''
+        icon: 'far fa-tooth'
     },
     {
         title: 'Reading in bed',
         time: { hour: 20, minute: 40 },
-        icon: ''
+        icon: 'fas fa-book-reader'
     },
     {
         title: 'Good night',
         time: { hour: 21, minute: 30 },
-        icon: ''
+        icon: 'far fa-moon'
     },
 ];
 
 function renderSchedule (elementId, actions, currentTime) {
-    console.log({currentTime})
     const containerEl = document.getElementById(elementId);
     let shownItems = 0;
     for (let i=0; i < actions.length; i++) {
@@ -70,7 +69,8 @@ function renderSchedule (elementId, actions, currentTime) {
 }
 
 function isUpcomingAction(action, currentTime) {
-    if (action.time.hour >= currentTime.getHours() && action.time.minute >= currentTime.getMinutes()) {
+    if (action.time.hour > currentTime.getHours() ||  
+        (action.time.hour === currentTime.getHours() && action.time.minute >= currentTime.getMinutes())){
         return true;
     }
     return false;
@@ -78,6 +78,12 @@ function isUpcomingAction(action, currentTime) {
 
 function timeString (action) {
     return `${action.time.hour}:${action.time.minute}`;
+}
+
+function renderTime(elementId, currentTime) {
+    const containerEl = document.getElementById(elementId);
+    containerEl.innerText = `${currentTime.getHours()}:${currentTime.getMinutes()}`;
+    console.log(containerEl.innerText);
 }
 
 function createActionElement (action) {
