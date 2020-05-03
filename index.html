@@ -16,12 +16,22 @@
         <div id="schedule" class=""></div>
     </div>    
     <script>
-        renderSchedule('schedule', actions, new Date());
+        const SCHEDULE_UPDATE_INTERVAL = 1000 * 60;
+        const TIME_UPDATE_INTERVAL = 1000 * 10;
 
-        renderTime('time', new Date());
-        window.setInterval(function () {
+        render();
+
+        function render () {
+            renderSchedule('schedule', actions, new Date());
+            window.setInterval(function () {
+                renderSchedule('schedule', actions, new Date());
+            }, SCHEDULE_UPDATE_INTERVAL);
+
             renderTime('time', new Date());
-        }, 1000 * 10);
+            window.setInterval(function () {
+                renderTime('time', new Date());
+            }, TIME_UPDATE_INTERVAL);
+        }
     </script>
 </body>
 </html>

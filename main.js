@@ -55,6 +55,7 @@ const actions = [
 
 function renderSchedule (elementId, actions, currentTime) {
     const containerEl = document.getElementById(elementId);
+    containerEl.innerHTML = '';
     let shownItems = 0;
     for (let i=0; i < actions.length; i++) {
         if (isUpcomingAction(actions[i], currentTime)) {
@@ -83,14 +84,13 @@ function timeString (action) {
 function renderTime(elementId, currentTime) {
     const containerEl = document.getElementById(elementId);
     containerEl.innerText = `${currentTime.getHours()}:${currentTime.getMinutes()}`;
-    console.log(containerEl.innerText);
 }
 
 function createActionElement (action) {
     const div = document.createElement('div');
     const time = timeString(action);
     div.innerHTML = `
-        <i class="${action.icon}" />
+        <i class="${action.icon}"></i>
         <label>${action.title} ${time}</label>
     `;
     return div;
